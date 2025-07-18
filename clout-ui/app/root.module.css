@@ -1,0 +1,9 @@
+﻿.appErrorWrapper {
+    margin: 4em auto;
+    max-width: 700px;
+}
+
+.errorCardWrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}

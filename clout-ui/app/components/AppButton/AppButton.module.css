@@ -1,0 +1,59 @@
+﻿/* primary lg default */
+.button {
+  background-color: var(--button-primary);
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.md {
+  border-radius: 20px;
+  padding: 12px 18px;
+}
+.sm {
+  border-radius: 16px;
+  padding: 8px 16px;
+}
+
+.primary:hover {
+  background-color: var(--button-primary-hover);
+}
+.primary:active {
+  background-color: var(--button-primary-active);
+}
+.primary:disabled {
+  background-color: var(--button-primary-disabled);
+  color: var(--button-primary-disabled-text);
+  cursor: not-allowed;
+}
+
+.secondary {
+  background-color: var(--button-secondary);
+  color: var(--button-secondary-text);
+  border: 1px solid var(--button-secondary-border);
+}
+.secondary:hover {
+  background-color: var(--button-secondary-hover);
+  border: 1px solid var(--button-secondary-border-hover);
+}
+.secondary:active {
+  background-color: var(--button-secondary-active);
+}
+.secondary:disabled {
+  background-color: var(--button-secondary-disabled);
+  color: var(--button-secondary-disabled-text);
+  border: 1px solid var(--button-secondary-disabled);
+  cursor: not-allowed;
+}
+
+.danger {
+  background-color: var(--button-danger);
+  color: var(--button-danger-text);
+}
+.danger:hover {
+  background-color: var(--button-danger-hover);
+}
