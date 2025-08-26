@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("clout-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b8e8f2399a84566b26d98559188bd3b10b4b486")]
 [assembly: System.Reflection.AssemblyProductAttribute("clout-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("clout-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -43,6 +43,20 @@ public abstract class FriendRequestRepositoryBase
         //     .ToListAsync();
     }
 
+    public virtual async Task<FriendRequest?> FindOutgoingFriendRequestsByFriendIdAndUserId(int friendId, int userId)
+    {
+        return await _postgresContext.FriendRequests
+            .FirstOrDefaultAsync(fr => (fr.UserIdOne == friendId || fr.UserIdTwo == friendId)
+                                       && fr.Requestor == userId);
+    }
+
+    public virtual async Task<FriendRequest?> FindIncomingFriendRequestsByFriendIdAndUserId(int friendId, int userId)
+    {
+        return await _postgresContext.FriendRequests
+            .FirstOrDefaultAsync(fr => (fr.UserIdOne == userId || fr.UserIdTwo == userId)
+                                       && fr.Requestor == friendId);
+    }
+
     //todo rename outgoing pending friend requests
     public virtual async Task<List<FriendRequest>?> FindAllOutgoingFriendRequestsByUserId(int userId)
     {

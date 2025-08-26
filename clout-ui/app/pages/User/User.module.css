@@ -1,0 +1,57 @@
+﻿.userContainer {
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*width: 100%;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileBannerContainer {
+  position: relative;
+  padding-top: 100px;
+  width: 100%;
+  max-height: 25px;
+}
+
+.profileBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -40px;
+  position: relative;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 7%;
+}
+
+.profile {
+  padding-top: 25px;
+  font-size: 26px;
+}
+
+.username {
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutMe {
+  padding-top: 25px;
+}
+
+.postContainer {
+  padding-top: 100px;
+  /*background: yellow;*/
+}

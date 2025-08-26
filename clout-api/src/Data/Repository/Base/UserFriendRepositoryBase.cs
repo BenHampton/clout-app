@@ -18,9 +18,15 @@ public abstract class UserFriendRepositoryBase
         _postgresContext = postgresContext;
     }
 
-    public virtual async Task<UserFriend?> FindByIdAsync(int id)
+    public virtual async Task<UserFriend?> FindByUserIdAsync(int userId)
     {
-        return await _postgresContext.UserFriends.FirstOrDefaultAsync(user => user.Id == id);
+        return await _postgresContext.UserFriends.FirstOrDefaultAsync(user => user.UserId == userId);
+    }
+
+    public virtual async Task<UserFriend?> FindByUserIdAndFriendIdAsync(int userId, int friendId)
+    {
+        return await _postgresContext.UserFriends
+            .FirstOrDefaultAsync(user => user.UserId == userId && user.FriendId == friendId);
     }
 
     public virtual async Task<List<UserFriend>?> FindAllByUserIdAsync(int userId)
@@ -36,5 +42,18 @@ public abstract class UserFriendRepositoryBase
         await _postgresContext.UserFriends.AddAsync(userFriend);
         await _postgresContext.SaveChangesAsync();
         return userFriend;
+    }
+
+    public async Task<List<UserFriend>?> DeleteByUserFriendsAsync(List<UserFriend> userFriends)
+    {
+        // var userFriends = await _postgresContext.UserFriends
+        //     .Where(uf => (uf.FriendId == friendId && uf.UserId == userId) ||
+        //                  uf.FriendId == userId && uf.UserId == friendId)
+        //     .ToListAsync();
+
+        _postgresContext.UserFriends.RemoveRange(userFriends);
+        await _postgresContext.SaveChangesAsync();
+
+        return userFriends;
     }
 }

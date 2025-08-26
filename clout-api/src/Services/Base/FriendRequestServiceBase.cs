@@ -33,7 +33,6 @@ public abstract class FriendRequestServiceBase
 
     public virtual async Task<FriendRequestDto?> FindByIdAsync(int id)
     {
-        _logger.LogInformation("BEN");
         var friendRequest = await _friendRequestRepository.FindByIdAsync(id);
         return _mapper.Map<FriendRequestDto>(friendRequest);
     }
@@ -56,7 +55,7 @@ public abstract class FriendRequestServiceBase
         return _mapper.Map<List<FriendRequestDto>>(friendRequests);
     }
 
-    public virtual async Task<FriendRequestDto?> CreateAsync(RequestFriendRequestDto requestFriendRequestDto)
+    public virtual async Task<ResponseFriendRequestDto?> CreateAsync(RequestFriendRequestDto requestFriendRequestDto)
     {
 
         var userFromRequestPostDto = _mapper.Map<FriendRequest>(requestFriendRequestDto);
@@ -77,10 +76,13 @@ public abstract class FriendRequestServiceBase
 
         var friendRequest = await _friendRequestRepository.CreateAsync(userFromRequestPostDto);
 
-        return _mapper.Map<FriendRequestDto>(friendRequest);
+        var responseFriendRequestDto = _mapper.Map<ResponseFriendRequestDto>(friendRequest);
+        responseFriendRequestDto.RelationshipType = RelationshipType.PENDING_OUTGOING;
+
+        return responseFriendRequestDto;
     }
 
-    public virtual async Task<FriendRequestDto?> UpdateAsync(RequestFriendRequestDto requestFriendRequestDto, int statusId)
+    public virtual async Task<ResponseFriendRequestDto?> UpdateAsync(RequestFriendRequestDto requestFriendRequestDto, int statusId)
     {
 
         if ((int)RelationshipType.APPROVED_REQUEST == statusId)
@@ -97,7 +99,9 @@ public abstract class FriendRequestServiceBase
             if (savedUserFriendOne != null && savedUserFriendTwo != null)
             {
                 await DeleteAllByUserIdOneAndUserIdTwoAsync(requestFriendRequestDto.UserIdOne, requestFriendRequestDto.UserIdTwo);
-                return _mapper.Map<FriendRequestDto>(savedUserFriendOne);
+                var responseFriendRequestDto = _mapper.Map<ResponseFriendRequestDto>(savedUserFriendOne);
+                responseFriendRequestDto.RelationshipType = RelationshipType.FRIEND;
+                return responseFriendRequestDto;
             }
 
             return null;
@@ -106,7 +110,7 @@ public abstract class FriendRequestServiceBase
         return null;
     }
 
-    public virtual async Task<FriendRequest?> DeleteByIdAndFriendIdAsync(int id, int friendId)
+    public virtual async Task<ResponseFriendRequestDto?> DeleteByIdAndFriendIdAsync(int id, int friendId)
     {
         int userIdOne;
         int userIdTwo;
@@ -123,7 +127,10 @@ public abstract class FriendRequestServiceBase
 
         var friendRequest = await _friendRequestRepository.DeleteAllByUserIdOneAndUserIdTwoAsync(userIdOne, userIdTwo);
 
-        return friendRequest;
+        var responseFriendRequestDto = _mapper.Map<ResponseFriendRequestDto>(friendRequest);
+        responseFriendRequestDto.RelationshipType = RelationshipType.REQUEST;
+
+        return responseFriendRequestDto;
     }
 
     private async Task<FriendRequest?> DeleteAllByUserIdOneAndUserIdTwoAsync(int userIdOne, int userIdTwo)

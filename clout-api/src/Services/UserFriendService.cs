@@ -9,8 +9,12 @@ namespace clout_api.Services;
 
 public class UserFriendService : UserFriendServiceBase
 {
-    public UserFriendService(ILogger<UserFriendService> logger, IMapper mapper, UserFriendRepositoryBase userFriendRepository)
-        : base(logger, mapper, userFriendRepository)
+    public UserFriendService(ILogger<UserFriendService> logger, IMapper mapper,
+        UserRepositoryBase userRepository, FriendRequestRepositoryBase friendRequestRepository,
+        UserFriendRepositoryBase userFriendRepository)
+        : base(logger, mapper,
+            userRepository, friendRequestRepository,
+            userFriendRepository)
     {
     }
 }

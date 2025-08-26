@@ -8,7 +8,7 @@ public enum RelationshipType
     FRIEND = 1,
     UNFRIEND = 2,
     REQUEST = 3,
-    PENDING_INCOMING = 3,
+    PENDING_INCOMING = 4,
     PENDING_OUTGOING = 5,
     APPROVED_REQUEST = 6,
     REJECT = 7,

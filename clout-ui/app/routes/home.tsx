@@ -1,10 +1,12 @@
-import { Welcome } from '~/pages/welcome/welcome'
+﻿import { Outlet } from 'react-router'
+import { Header } from '~/components/Header/Header'
 
-export const meta = () => {
-  return [{ title: 'Clout UI | POC' }]
+const UserRoute = () => {
+  return (
+    <div>
+      <Header />
+      <Outlet />
+    </div>
+  )
 }
-
-export const HomeRoute = () => {
-  return <Welcome />
-}
-export default HomeRoute
+export default UserRoute

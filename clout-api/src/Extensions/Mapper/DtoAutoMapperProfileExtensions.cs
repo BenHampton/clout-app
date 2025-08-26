@@ -23,6 +23,7 @@ public partial class AutoMapperProfileExtensions : Profile
             .ForMember(dest => dest.Friends, opt => opt.MapFrom(src => src.UserFriends));
         CreateMap<User, SearchUserDto>();
         CreateMap<RequestUserDto, User>();
+        CreateMap<User, FriendDto>();
 
         CreateMap<UserFriend, UserFriendDto>();
         CreateMap<UserFriendRequestDto, UserFriend>();
@@ -33,13 +34,23 @@ public partial class AutoMapperProfileExtensions : Profile
             .ForMember(dest => dest.User, opt => opt.Ignore())
             .ForMember(dest => dest.Friend, opt => opt.Ignore());
 
+        CreateMap<UserFriend, MiniFriendDto>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.FriendId))
+            .ForMember(dest => dest.FirstName, opt => opt.Ignore())
+            .ForMember(dest => dest.LastName, opt => opt.Ignore());
+
         CreateMap<UserFriend, FriendDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.FriendId))
             .ForMember(dest => dest.FirstName, opt => opt.Ignore())
             .ForMember(dest => dest.LastName, opt => opt.Ignore());
 
+
         CreateMap<FriendRequest, FriendRequestDto>();
+        CreateMap<FriendRequest, ResponseFriendRequestDto>();
         CreateMap<RequestFriendRequestDto, FriendRequest>();
+        CreateMap<UserFriend, ResponseFriendRequestDto>()
+            .ForMember(dest => dest.UserIdOne, opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest => dest.UserIdTwo, opt => opt.MapFrom(src => src.FriendId));
         CreateMap<UserFriend, FriendRequestDto>()
             .ForMember(dest => dest.UserIdOne, opt => opt.MapFrom(src => src.UserId))
             .ForMember(dest => dest.UserIdTwo, opt => opt.MapFrom(src => src.FriendId));

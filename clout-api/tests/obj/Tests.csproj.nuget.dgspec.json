@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\tests\\Tests.csproj": {}
+    "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\tests\\Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\clout-api.csproj": {
+    "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\clout-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\clout-api.csproj",
+        "projectUniqueName": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\clout-api.csproj",
         "projectName": "clout-api",
-        "projectPath": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\clout-api.csproj",
+        "projectPath": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\clout-api.csproj",
         "packagesPath": "C:\\Users\\Ben\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\obj\\",
+        "outputPath": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\obj\\",
         "projectStyle": "PackageReference",
         "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
@@ -154,14 +154,14 @@
         }
       }
     },
-    "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\tests\\Tests.csproj": {
+    "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\tests\\Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\tests\\Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\tests\\Tests.csproj",
         "projectName": "Tests",
-        "projectPath": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\tests\\Tests.csproj",
+        "projectPath": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\tests\\Tests.csproj",
         "packagesPath": "C:\\Users\\Ben\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\tests\\obj\\",
+        "outputPath": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\tests\\obj\\",
         "projectStyle": "PackageReference",
         "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
@@ -177,8 +177,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\clout-api.csproj": {
-                "projectPath": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\clout-api.csproj"
+              "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\clout-api.csproj": {
+                "projectPath": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\clout-api.csproj"
               }
             }
           }

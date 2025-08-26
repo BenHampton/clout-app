@@ -2,11 +2,11 @@
 import type { User } from '~/types'
 
 type UserStore = {
-  user: User | null
-  setUser: (user: User) => void
+  appUser: User | null
+  setAppUser: (user: User) => void
 }
 
-export const useUserStore = create<UserStore>()((set) => ({
-  user: null,
-  setUser: (user: User) => set({ user: user }),
+export const useAppUserStore = create<UserStore>()((set) => ({
+  appUser: null,
+  setAppUser: (user: User) => set({ appUser: user }),
 }))

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "m6XPalaaVeY=",
+  "dgSpecHash": "+TOL3EeAIVo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\clout-api.csproj",
+  "projectFilePath": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\clout-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ben\\.nuget\\packages\\autofac\\8.2.1\\autofac.8.2.1.nupkg.sha512",
     "C:\\Users\\Ben\\.nuget\\packages\\autofac.extensions.dependencyinjection\\10.0.0\\autofac.extensions.dependencyinjection.10.0.0.nupkg.sha512",

@@ -6635,11 +6635,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\clout-api.csproj",
+      "projectUniqueName": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\clout-api.csproj",
       "projectName": "clout-api",
-      "projectPath": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\clout-api.csproj",
+      "projectPath": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\clout-api.csproj",
       "packagesPath": "C:\\Users\\Ben\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ben\\Documents\\git\\Dotnet\\clout-api\\src\\obj\\",
+      "outputPath": "C:\\Users\\Ben\\Documents\\git\\Full Stack Projects\\clout-app\\clout-api\\src\\obj\\",
       "projectStyle": "PackageReference",
       "UsingMicrosoftNETSdk": false,
       "configFilePaths": [

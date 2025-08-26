@@ -14,5 +14,5 @@ public class UserDto
 
     public string LastName { get; set; } = string.Empty;
 
-    public List<FriendDto> Friends { get; set; } = new List<FriendDto>();
+    public List<MiniFriendDto> Friends { get; set; } = new List<MiniFriendDto>();
 }

@@ -1,22 +1,15 @@
-import { type RouteConfig, index, route, layout } from '@react-router/dev/routes'
+import { type RouteConfig, index, route } from '@react-router/dev/routes'
 
-// export default [index("routes/home.tsx")] satisfies RouteConfig;
 export default [
-  index('routes/home.tsx'),
   // layout('routes/permissionHandler.tsx', [
-  //     index('routes/home.tsx'),
-  route('login', 'pages/login/Login.tsx'),
-  route('user/:userId', 'pages/user/User.tsx'),
-  route('search', 'pages/search/Search.tsx'),
-  // route('pipeline/:pipelineId/schedule/:scheduleId', 'pages/login/Login.tsx'),
-  // route('login', 'routes/login.tsx', [route('test', 'pages/login/Login.tsx')]),
-  // ]),
-
-  // layout('routes/permissionHandler.tsx', [
-  //     index('routes/home.tsx'),
-  //     route('scheduling', 'routes/schedule.tsx', [
-  //         index('routes/UnselectedSchedule.tsx'),
-  //         route('pipeline/:pipelineId/schedule/:scheduleId', 'pages/schedule/Schedule.tsx'),
-  //     ]),
+  route('/', 'routes/login.tsx', [
+    index('pages/Login/Login.tsx'),
+    route('/:userName', 'routes/home.tsx', [
+      index('pages/Home/Home.tsx'),
+      route('profile', 'pages/Profile/Profile.tsx'),
+      route('user/:userId', 'pages/User/User.tsx'),
+      // route('search', 'pages/search/Search.tsx'),
+    ]),
+  ]),
   // ]),
 ] satisfies RouteConfig

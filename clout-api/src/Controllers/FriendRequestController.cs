@@ -27,9 +27,9 @@ public class FriendRequestController: ControllerBase
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<FriendRequestDto>> FindById(int Id)
+    public async Task<ActionResult<FriendRequestDto>> FindById(int id)
     {
-        var friendRequestDto = await _friendRequestService.FindByIdAsync(Id);
+        var friendRequestDto = await _friendRequestService.FindByIdAsync(id);
         return Ok(friendRequestDto);
     }
 
@@ -38,7 +38,7 @@ public class FriendRequestController: ControllerBase
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<FriendRequestDto>> CreateAsync([FromBody] RequestFriendRequestDto requestFriendRequestDto)
+    public async Task<ActionResult<ResponseFriendRequestDto>> CreateAsync([FromBody] RequestFriendRequestDto requestFriendRequestDto)
     {
         if (!ModelState.IsValid) //comes from base controller
         {
@@ -52,7 +52,7 @@ public class FriendRequestController: ControllerBase
             return BadRequest("Failed to create friend request");
         }
 
-        return CreatedAtAction(nameof(FindById), new { id = friendRequestDto.Id }, friendRequestDto);
+        return CreatedAtAction(nameof(FindById), new { id = friendRequestDto.Requestor },  friendRequestDto);
     }
 
     [HttpPut]
@@ -60,7 +60,7 @@ public class FriendRequestController: ControllerBase
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<FriendRequestDto>> UpdateAsync([FromQuery(Name = "statusId")] int statusId, [FromBody] RequestFriendRequestDto requestFriendRequestDto)
+    public async Task<ActionResult<ResponseFriendRequestDto>> UpdateAsync([FromQuery(Name = "statusId")] int statusId, [FromBody] RequestFriendRequestDto requestFriendRequestDto)
     {
 
         if (!ModelState.IsValid)
@@ -68,9 +68,9 @@ public class FriendRequestController: ControllerBase
             return BadRequest(ModelState);
         }
 
-        var friendRequestDto = await _friendRequestService.UpdateAsync(requestFriendRequestDto, statusId);
+        var responseFriendRequestDto = await _friendRequestService.UpdateAsync(requestFriendRequestDto, statusId);
 
-        return friendRequestDto == null ? NotFound(friendRequestDto) : Ok(friendRequestDto);
+        return responseFriendRequestDto == null ? NotFound(responseFriendRequestDto) : Ok(responseFriendRequestDto);
     }
 
     [HttpDelete("user/{id:int}")]

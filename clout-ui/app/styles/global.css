@@ -1,34 +1,38 @@
 @font-face {
-    font-family: InterVariable;
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
+  font-family: InterVariable;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
 }
 @font-face {
-    font-family: InterVariable;
-    font-style: italic;
-    font-weight: 100 900;
-    font-display: swap;
+  font-family: InterVariable;
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
 }
 
 body,
 html {
-    font-family: InterVariable, sans-serif;
-    color: black;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: #e0e0e0;
+  font-family: InterVariable, sans-serif;
+  color: black;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--primary-bg);
 }
 
 .svg-text-outline {
-    stroke: white;
-    stroke-width: 1px;
-    stroke-linejoin: round;
-    paint-order: stroke;
+  stroke: white;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+  paint-order: stroke;
 }
 
 /* override Mac browser stylesheet defaults that the html/body rule doesn't cover */
 button {
-    font-family: InterVariable, sans-serif;
+  font-family: InterVariable, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
 }

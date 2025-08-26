@@ -52,20 +52,20 @@ public abstract class UserServiceBase
 
         List<UserDto> friends = await FindFriends(userDto.Friends);
 
-        foreach (FriendDto friendDto in userDto.Friends)
+        foreach (MiniFriendDto miniFriendDto in userDto.Friends)
         {
-            var friendUserDto = friends.FirstOrDefault(f => f.Id == friendDto.Id);
+            var friendUserDto = friends.FirstOrDefault(f => f.Id == miniFriendDto.Id);
             if (friendUserDto != null)
             {
-                friendDto.FirstName = friendUserDto.FirstName;
-                friendDto.LastName = friendUserDto.LastName;
+                miniFriendDto.FirstName = friendUserDto.FirstName;
+                miniFriendDto.LastName = friendUserDto.LastName;
             }
         }
 
         return userDto;
     }
 
-    private async Task<List<UserDto>> FindFriends(List<FriendDto> friends)
+    private async Task<List<UserDto>> FindFriends(List<MiniFriendDto> friends)
     {
         var friendIds = friends
             .Select(f => f.Id)
@@ -84,9 +84,22 @@ public abstract class UserServiceBase
     public virtual async Task<List<UserDto>?> FindAllByIdsAsync(List<int> ids)
     {
 
-        var users = await _userRepository.FindAllByIdsAsync(ids);
+        var users = await FindAllUsersByIdsAsync(ids);
 
         return _mapper.Map<List<UserDto>>(users);
+    }
+
+    private async Task<List<User>?> FindAllUsersByIdsAsync(List<int> ids)
+    {
+        return await _userRepository.FindAllByIdsAsync(ids);
+    }
+
+    public virtual async Task<List<MiniFriendDto>?> FindAllFriendsByIds(List<int> ids)
+    {
+
+        var users = await FindAllUsersByIdsAsync(ids);
+
+        return _mapper.Map<List<MiniFriendDto>>(users);
     }
 
     public virtual async Task<User> CreateAsync(RequestUserDto requestUserDto)
@@ -122,7 +135,7 @@ public abstract class UserServiceBase
 
         var userIds = user.Select(u => u.Id).ToList();
 
-        var userFriendDtos = await _userFriendService.FindAllByUserIdAsync(currentUserId);
+        var userFriendDtos = await _userFriendService.FindAllUserFriendDtosByUserIdAsync(currentUserId);
         if (userFriendDtos is { Count: > 0 })
         {
             foreach (UserFriendDto userFriendDto in userFriendDtos)

@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using AutoMapper;
-using clout_api.Data.Dtos.User;
+using clout_api.Data.Dtos.Friend;
 using clout_api.Data.Dtos.UserFriend;
 using clout_api.Data.Models;
-using clout_api.Data.Repository;
 using clout_api.Data.Repository.Base;
 
 namespace clout_api.Services.Base;
@@ -16,29 +15,117 @@ public abstract class UserFriendServiceBase
 
     private readonly IMapper _mapper;
 
+    private readonly UserRepositoryBase _userRepository;
+
+    private readonly FriendRequestRepositoryBase _friendRequestRepository;
+
     private readonly UserFriendRepositoryBase _userFriendRepository;
 
     [Obsolete("For testing only")]
     protected UserFriendServiceBase()
     {}
 
-    protected UserFriendServiceBase(ILogger<UserFriendService> logger, IMapper mapper, UserFriendRepositoryBase userFriendRepository)
+    protected UserFriendServiceBase(ILogger<UserFriendService> logger, IMapper mapper,
+        UserRepositoryBase userRepository, FriendRequestRepositoryBase friendRequestRepository,
+        UserFriendRepositoryBase userFriendRepository)
     {
         _logger = logger;
         _mapper = mapper;
+        _userRepository = userRepository;
+        _friendRequestRepository = friendRequestRepository;
         _userFriendRepository = userFriendRepository;
     }
 
-    public virtual async Task<UserFriendDto?> FindByIdAsync(int id)
+    public virtual async Task<FriendDto?> FindAllByFriendIdAndUserIdAsync(int friendId, int userId)
     {
-        var userFriend = await _userFriendRepository.FindByIdAsync(id);
-        return _mapper.Map<UserFriendDto>(userFriend);
+        //find single friend
+        var user = await _userRepository.FindByIdAsync(friendId);
+
+        if (user == null)
+        {
+            return null;
+        }
+
+        RelationshipType? relationshipType = null;
+        var userFriends = await FindByUserIdAndFriendIdAsync(userId, friendId);
+
+        if (userFriends != null)
+        {
+            relationshipType = RelationshipType.FRIEND;
+        }
+
+
+        if (relationshipType == null)
+        {
+            var outgoingFriendRequest = await _friendRequestRepository.FindOutgoingFriendRequestsByFriendIdAndUserId(friendId, userId);
+
+            if (outgoingFriendRequest != null)
+            {
+                relationshipType = RelationshipType.PENDING_OUTGOING;
+            }
+            else
+            {
+                var incomingFiendRequest = await _friendRequestRepository.FindIncomingFriendRequestsByFriendIdAndUserId(friendId, userId);
+                if (incomingFiendRequest != null)
+                {
+                    relationshipType = RelationshipType.PENDING_INCOMING;
+                }
+            }
+        }
+
+        var friendDto = _mapper.Map<FriendDto>(user);
+        friendDto.RelationshipType = relationshipType;
+
+        return friendDto;
     }
 
-    public virtual async Task<List<UserFriendDto>?> FindAllByUserIdAsync(int userId)
+    public async Task<UserFriend?> FindByUserIdAndFriendIdAsync(int userId, int friendId)
     {
-        var userFriends = await _userFriendRepository.FindAllByUserIdAsync(userId);
+        return await _userFriendRepository.FindByUserIdAndFriendIdAsync(userId, friendId);
+    }
+
+    public virtual async Task<List<MiniFriendDto>?> FindAllByUserIdAsync(int userId)
+    {
+        var userFriends = await FindAllUserFriendByUserIdAsync(userId);
+
+        if (userFriends == null)
+        {
+            return null;
+        }
+
+        var friendIds = userFriends.Select(uf => uf.FriendId).ToList();
+
+        var users = await _userRepository.FindAllByIdsAsync(friendIds);
+
+        var miniFriendDtos = _mapper.Map<List<MiniFriendDto>>(userFriends);
+
+        if (users == null)
+        {
+            return miniFriendDtos;
+        }
+
+        foreach (var friendDto in miniFriendDtos)
+        {
+            var user = users.FirstOrDefault(u => u.Id == friendDto.Id);
+            if (user != null)
+            {
+                friendDto.FirstName = user.FirstName;
+                friendDto.LastName = user.LastName;
+            }
+        }
+
+        return miniFriendDtos;
+    }
+
+    public virtual async Task<List<UserFriendDto>?> FindAllUserFriendDtosByUserIdAsync(int userId)
+    {
+        var userFriends = await FindAllUserFriendByUserIdAsync(userId);
         return _mapper.Map<List<UserFriendDto>>(userFriends);
+    }
+
+    private async Task<List<UserFriend>?> FindAllUserFriendByUserIdAsync(int userId)
+    {
+       return await _userFriendRepository.FindAllByUserIdAsync(userId);
     }
 
     public virtual async Task<UserFriend> CreateAsyncFromDto(UserFriendRequestDto userFriendRequestDto)
@@ -76,6 +163,19 @@ public abstract class UserFriendServiceBase
 
         await _userFriendRepository.CreateAsync(friendFromRequestPostDto);
         return await _userFriendRepository.CreateAsync(userFromRequestPostDto);
+    }
+
+    public virtual async Task<List<UserFriend>?> DeleteByUserIdAndFriendIdAsync(int userId, int friendId)
+    {
+        var userFriend = await FindByUserIdAndFriendIdAsync(userId, friendId);
+        var friendUserFriend = await FindByUserIdAndFriendIdAsync(userId, friendId);
+
+        if (userFriend == null || friendUserFriend == null)
+        {
+            return null;
+        }
+        var userFriends = new List<UserFriend> { userFriend, friendUserFriend };
+        return await _userFriendRepository.DeleteByUserFriendsAsync(userFriends);
     }
 
 }

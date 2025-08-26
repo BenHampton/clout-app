@@ -1,0 +1,16 @@
+﻿.homeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userInformation {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContainer {
+  padding-top: 15px;
+}

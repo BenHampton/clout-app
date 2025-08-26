@@ -1,13 +1,26 @@
-﻿export interface User {
+﻿export interface NetworkData<T> {
+  data: T | null
+  onRefetch: () => void
+  loading: boolean
+  error: Error | null
+}
+
+export interface User {
   id: number
   firstName: string
   lastName: string
-  userFriends: Friend[]
+  friends: Friend[]
 }
 
 export interface Friend {
-  friendId: number
+  id: number
   firstName: string
   lastName: string
   relationshipType: number
+}
+
+export interface FriendRequest {
+  userIdOne: number
+  userIdTwo: number
+  requestor: number
 }

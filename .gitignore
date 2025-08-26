@@ -1,0 +1,12 @@
+#clout-ui
+
+.DS_Store
+clout-ui/DS_Store
+clout-ui/node_modules/
+
+# React Router
+clout-ui/.react-router/
+clout-ui/build/
+
+
+#clout-api
